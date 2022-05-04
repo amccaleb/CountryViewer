@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Partially based on:
+    - https://velmurugan-murugesan.medium.com/getting-started-with-recyclerview-example-3c7a48498715
+    - https://medium.com/tiendeo-tech/how-to-align-textview-with-constraintlayout-parent-to-the-left-4c0d25c1c819
+    - https://stackoverflow.com/questions/60743817/android-constraintlayout-how-to-left-align-a-textview-but-it-should-show-ellips
+    - https://www.geeksforgeeks.org/how-to-draw-horizontal-and-vertical-lines-in-an-android-app-using-xml/
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvNameAndRegion"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/textFieldHeight"
+        android:padding="@dimen/textFieldPadding"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvCapital"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tvCode"
+        tools:text="United States of America, NA"/>
+
+    <TextView
+        android:id="@+id/tvCode"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/textFieldHeight"
+        android:padding="@dimen/textFieldPadding"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvCapital"
+        app:layout_constraintStart_toEndOf="@id/tvNameAndRegion"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="US"/>
+
+    <TextView
+        android:id="@+id/tvCapital"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/textFieldHeight"
+        android:padding="@dimen/textFieldPadding"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/tvNameAndRegion"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tvCode"
+        tools:text="Washington D.C."/>
+
+    <!-- Add a horizontal line for readability-sake -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:padding="@dimen/textFieldPadding"
+        android:background="@color/purple_200"
+        app:layout_constraintTop_toBottomOf="@id/tvCapital"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

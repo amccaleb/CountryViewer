@@ -2,6 +2,7 @@ package com.nothesearentajaysapps.countryviewer
 
 import com.nothesearentajaysapps.countryviewer.models.CountryModel
 import com.nothesearentajaysapps.countryviewer.networking.IPeymanoAPI
+import com.nothesearentajaysapps.countryviewer.ui.main.MainViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -10,10 +11,14 @@ import retrofit2.Response
  * Repository to fetch countries from. This is a pile of anything fetched from the network, stored
  * locally, etc.
  */
-class CountriesRepository {
+class CountriesRepository(val viewModel: MainViewModel) {
 
     val countries: ArrayList<CountryModel> = ArrayList()
 
+    /**
+     * Requests a set of countries from the network and appends any new ones to our list.
+     * Upon success, updates a LiveData with the results.
+     */
     fun appendCountriesFromNetwork() {
         // Make the call to the endpoint via Retrofit
         // Based on: https://github.com/velmurugan-murugesan/Android-Example/blob/master/RetrofitWithRecyclerviewKotlin/app/src/main/java/app/com/retrofitwithrecyclerviewkotlin/MainActivity.kt
@@ -36,9 +41,8 @@ class CountriesRepository {
                     }
                 }
 
-                var x = 0
-                // TODO: Pass the countries as a LiveData upward for the UI to refresh?
-
+                // Pass the countries as a LiveData upward for the UI to refresh
+                viewModel.countriesLiveData.value = countries
             }
 
             override fun onFailure(call: Call<List<CountryModel>>, throwable: Throwable) {
