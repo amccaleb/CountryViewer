@@ -22,11 +22,13 @@ package com.nothesearentajaysapps.countryviewer.models
  *   },
  *
  *   Note: Only the fields asked for by the assignment are parsed.
+ *
+ * We ensure we properly compare CountryModels for equality based on:
+ * - https://kt.academy/article/ek-equals
  */
-class CountryModel {
-
-    lateinit var name: String
-    lateinit var region: String
-    lateinit var code: String
-    lateinit var capital: String
-}
+data class CountryModel(
+    var name: String,
+    var region: String,
+    var code: String,
+    var capital: String
+)
