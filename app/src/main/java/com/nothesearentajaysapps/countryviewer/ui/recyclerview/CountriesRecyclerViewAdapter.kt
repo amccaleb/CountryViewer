@@ -52,7 +52,7 @@ class CountriesRecyclerViewAdapter : RecyclerView.Adapter<CountriesRecyclerViewA
         var nameAndRegionText = country.name
         val region = country.region
         if (region.isNotBlank()) {
-            nameAndRegionText += ", ${region}"
+            nameAndRegionText += ", $region"
         }
         holder.nameAndRegion.text = nameAndRegionText
 

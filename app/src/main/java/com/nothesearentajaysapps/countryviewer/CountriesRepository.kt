@@ -43,9 +43,8 @@ class CountriesRepository(val viewModel: MainViewModel) {
             ) {
                 val responseBody = response.body()
                 if (responseBody == null) {
-                    // Well that was unexpected.
                     Log.e(LOG_TAG, "Got an error from the network: " + response.errorBody().toString())
-                } else { // FIXME: This can break the "order presented in JSON" part of the test, but does handle ensuring no dupes show up when relaunching the Activity.
+                } else { // Note: This can break the "order presented in JSON" part of the test if the data were to change.
                     // Add anything new from the network response
                     for (country in responseBody) {
                         if (!countries.contains(country)) {
@@ -59,7 +58,7 @@ class CountriesRepository(val viewModel: MainViewModel) {
             }
 
             override fun onFailure(call: Call<List<CountryModel>>, throwable: Throwable) {
-                // TODO: Handle failure case
+                Log.e(LOG_TAG, "Couldn't fetch countries from the network: " + throwable.localizedMessage)
             }
         })
     }
