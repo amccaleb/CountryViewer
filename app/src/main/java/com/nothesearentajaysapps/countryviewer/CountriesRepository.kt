@@ -1,5 +1,6 @@
 package com.nothesearentajaysapps.countryviewer
 
+import android.util.Log
 import com.nothesearentajaysapps.countryviewer.models.CountryModel
 import com.nothesearentajaysapps.countryviewer.networking.IPeymanoAPI
 import com.nothesearentajaysapps.countryviewer.ui.main.MainViewModel
@@ -12,6 +13,10 @@ import retrofit2.Response
  * locally, etc.
  */
 class CountriesRepository(val viewModel: MainViewModel) {
+
+    companion object {
+        const val LOG_TAG = "CountriesRepository"
+    }
 
     val countries: ArrayList<CountryModel> = ArrayList()
 
@@ -31,8 +36,9 @@ class CountriesRepository(val viewModel: MainViewModel) {
             ) {
                 val responseBody = response.body()
                 if (responseBody == null) {
-                    // TODO: Handle error case
-                } else { // FIXME: This can break the "order presented in JSON" part of the test.
+                    // Well that was unexpected.
+                    Log.e(LOG_TAG, "Got an error from the network: " + response.errorBody().toString())
+                } else { // FIXME: This can break the "order presented in JSON" part of the test, but does handle ensuring no dupes show up when relaunching the Activity.
                     // Add anything new from the network response
                     for (country in responseBody) {
                         if (!countries.contains(country)) {

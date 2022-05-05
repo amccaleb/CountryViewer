@@ -13,11 +13,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <!--
+        Ensure this TextView wraps as the country names can be big per: https://quick-adviser.com/how-do-you-wrap-text-in-textview/
+    -->
     <TextView
         android:id="@+id/tvNameAndRegion"
         android:layout_width="0dp"
-        android:layout_height="@dimen/textFieldHeight"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/textFieldHeight"
         android:padding="@dimen/textFieldPadding"
+        android:ellipsize="none"
+        android:scrollHorizontally="false"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/black"
         android:textStyle="bold"
