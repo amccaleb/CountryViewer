@@ -21,6 +21,13 @@ class CountriesRepository(val viewModel: MainViewModel) {
     val countries: ArrayList<CountryModel> = ArrayList()
 
     /**
+     * Gets the current set of countries as LiveData.
+     */
+    fun getCachedCountries() {
+        viewModel.countriesLiveData.value = countries
+    }
+
+    /**
      * Requests a set of countries from the network and appends any new ones to our list.
      * Upon success, updates a LiveData with the results.
      */

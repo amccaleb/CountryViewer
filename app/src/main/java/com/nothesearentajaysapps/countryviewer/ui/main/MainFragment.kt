@@ -47,10 +47,8 @@ class MainFragment : Fragment() {
         return fragment
     }
 
-    // TODO: Not use deprecated stuff
-    @Deprecated("Deprecated in Java")
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         // Set up connections to the data to display
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
@@ -64,7 +62,9 @@ class MainFragment : Fragment() {
         // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
         viewModel.countriesLiveData.observe(viewLifecycleOwner, countriesObserver)
 
-        // Fetch the countries list, which will post results to the above LiveData
+        // Fetch the countries list, which will post results to the above LiveData. Since this data
+        // is held in a ViewModel, it already survives the Activity being recreated in a low
+        // resource situation.
         viewModel.getCountries()
     }
 
